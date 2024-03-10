@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <style>
+    .card {
+      border: 1px solid black;
+      border-radius: 20px;
+      box-sizing: border-box;
+    }
+    img {
+      height: 100px;
+    }
+  </style>
+  <body>
+     <nav class="navbar navbar  shadow-lg p-2">
+  <div class="container-fluid">
+    <a class="navbar-brand">Navbar</a>
+    <form class="d-flex">
+      {% if request.user.is_authenticated %}
+      <a href="/logout/" type="button" class="btn btn-primary">Logoot</a>
+      {% else %}
+      <a href="/login/" type="button" class="btn btn-primary">Login</a>
+      {% endif %}
+    </form>
+  </div>
+</nav>
+    <div class="container col-md-5 p-5 mt-5 card shadow-lg  bg-body">
+      <form method="post" enctype="multipart/form-data" autocomplete="off">
+        {% csrf_token %}
+        <h1 class="text-primary">LOGIN HERE...</h1>
+        <hr />
+         {% if messages %}
+        <div class="alert alert-primary" role="alert">
+              {% for message in messages %}
+              {{ message }}
+              {% endfor %}
+        <ul class="messages">
+   
+    
+         <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      
+        </ul>
+        {% endif %}
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Username</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            
+            name="username"
+            placeholder="Username"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label"
+            >Password</label
+          >
+           <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            name="pass"
+            placeholder="Password"
+          />
+     
+ 
+        <button class="btn btn-primary w-100 mt-5" type="submit">
+          Update Receipe
+        </button>
+         <p>Create new account<a href="/register/" type="button" class="btn btn-success mt-3 mx-auto">&nbsp;Register</a>  </p>
+      </form>
+    </div>
+  </body>
+</html>
